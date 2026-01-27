@@ -1,0 +1,23 @@
+<div th:fragment="bodyContent" class="container mt-4">
+
+  <h2 th:text="'Dishes by ' + ${chef.firstName} + ' ' + ${chef.lastName}"></h2>
+
+  <table class="table table-striped mt-3">
+    <thead>
+    <tr>
+      <th>Dish Name</th>
+      <th>Cuisine</th>
+      <th>Preparation Time</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="dish : ${dishes}">
+      <td th:text="${dish.name}"></td>
+      <td th:text="${dish.cuisine}"></td>
+      <td th:text="${dish.preparationTime + ' min'}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>

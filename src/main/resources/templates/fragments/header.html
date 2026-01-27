@@ -1,0 +1,45 @@
+<header xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">WEB PROGRAMMING</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item m-auto">
+                        <a class="nav-link active" href="/dishes">Dishes</a>
+                    </li>
+                    <li class="nav-item m-auto">
+                        <a class="nav-link active" href="/chefs">Chefs</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="btn btn-sm ml-3 nav-link text-white d-inline-flex align-items-center"
+                           href="#" role="button">
+                            <i class="fa fa-user mr-2"></i>
+                            <span sec:authentication="name"></span>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="btn btn-light btn-sm ml-3" href="/login">
+                            <i class="fa-solid fa-right-to-bracket"></i> Login
+                        </a>
+                    </li>
+
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="btn btn-light btn-sm ml-3" href="/logout">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

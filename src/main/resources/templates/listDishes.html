@@ -1,0 +1,71 @@
+<div th:fragment="bodyContent">
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">All Dishes</h1>
+
+            <p th:if="${error != null}" class="text-danger font-weight-bold" th:text="${error}"></p>
+        </div>
+    </section>
+
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12" th:if="${dishes.size() > 0}">
+                <div class="table-responsive">
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Dish ID</th>
+                            <th>Name</th>
+                            <th>Cuisine</th>
+                            <th>Prep Time</th>
+                            <th:block sec:authorize="hasRole('ADMIN')">
+                                <th>Actions</th>
+                            </th:block>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="d : ${dishes}">
+                            <td th:text="${d.dishId}"></td>
+                            <td th:text="${d.name}"></td>
+                            <td th:text="${d.cuisine}"></td>
+                            <td th:text="${d.preparationTime + ' min'}"></td>
+
+                            <td>
+                                <th:block sec:authorize="hasRole('ADMIN')">
+                                    <a th:href="@{'/dishes/dish-form/{id}' (id=${d.id})}"
+                                       class="btn btn-sm btn-info ml-2">
+                                        Edit
+                                    </a>
+                                </th:block>
+
+                                <th:block sec:authorize="hasRole('ADMIN')">
+                                    <form th:action="@{'/dishes/delete/{id}' (id=${d.id})}"
+                                          method="post" style="display:inline-block">
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </th:block>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <th:block sec:authorize="hasRole('ADMIN')">
+                <div class="col mb-3">
+                    <a href="/dishes/dish-form" class="btn btn-dark btn-block">
+                        Add New Dish
+                    </a>
+                </div>
+            </th:block>
+
+        </div>
+    </div>
+
+</div>
