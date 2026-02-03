@@ -86,7 +86,7 @@ class FullFlowIntegrationTest {
         long countAfterCreate = chefRepository.count();
         assertThat(countAfterCreate).isEqualTo(countBefore + 1);
 
-        // Го наоѓаме токму креираниот Chef според прво и презиме
+        // Го наоѓаме токму креираниот Chef според име и презиме
         Optional<Chef> createdOpt = chefRepository.findAll()
                 .stream()
                 .filter(c -> "Int".equals(c.getFirstName()) && "Chef".equals(c.getLastName()))
