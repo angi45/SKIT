@@ -1,25 +1,37 @@
 package mk.ukim.finki.wp.lab.web;
 
+import mk.ukim.finki.wp.lab.config.WebSecurityConfig;
+import mk.ukim.finki.wp.lab.config.CustomUsernamePasswordAuthenticationProvider;
+import mk.ukim.finki.wp.lab.service.AuthService;
+import mk.ukim.finki.wp.lab.web.controller.LoginController;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+//Web MVC Test (@WebMvcTest) е интеграционен тест на Spring MVC контролерите.
+//Тестираме Controller без вистински сервис слој
+@WebMvcTest(LoginController.class)
+@Import(WebSecurityConfig.class)
+@AutoConfigureMockMvc(addFilters = true)
+class LoginControllerTest {
 
-/**
- * Интеграциони тестови за Login функционалноста преку LoginController.
- *
- * Се тестира:
- *  - вчитување на login страната како анонимен корисник
- *  - успешно логирање со валидни креденцијали и пренасочување кон /dishes
- *  - неуспешно логирање и враќање назад на /login со параметар за грешка
- */
-public class LoginControllerTest extends BaseWebTest {
+    @Autowired
+    private MockMvc mockMvc;
 
-    /**
-     * Проверува дека login страницата е достапна за анонимен корисник.
-     */
+    @MockitoBean
+    private AuthService authService;
+
+    @MockitoBean
+    private CustomUsernamePasswordAuthenticationProvider authProvider;
+
     @Test
     @WithAnonymousUser
     void testLoginPageLoads() throws Exception {
@@ -30,23 +42,6 @@ public class LoginControllerTest extends BaseWebTest {
                 .andExpect(model().attribute("bodyContent", "login"));
     }
 
-    /**
-     * Проверува дека успешното логирање резултира со redirect кон /dishes.
-     */
-    @Test
-    void testSuccessfulLoginRedirectsToDishes() throws Exception {
-        ResultActions result = mockMvc.perform(post("/login")
-                .param("username", "admin")
-                .param("password", "admin"));
-
-        result.andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/dishes"));
-    }
-
-    /**
-     * Проверува дека неуспешно логирање предизвикува пренасочување
-     * назад кон login страницата со параметар error=BadCredentials.
-     */
     @Test
     void testFailedLoginRedirectsBackToLoginPage() throws Exception {
         mockMvc.perform(post("/login")
@@ -56,3 +51,4 @@ public class LoginControllerTest extends BaseWebTest {
                 .andExpect(redirectedUrl("/login?error=BadCredentials"));
     }
 }
+

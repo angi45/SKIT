@@ -32,6 +32,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Тестот ја проверува вистинската функционална низа:
  * Controller → Service → Repository → Реална PostgreSQL база
  */
+//simulacija na realen request kako da doagja od frontend i proveruva dali celiot backend raboti pravilno od pocetok do kraj
+//backend flow(kako povekje komponentite rabotat zaedno kako celina) = povekje klasi zaedno
 @SpringBootTest
 @AutoConfigureMockMvc
 @Testcontainers

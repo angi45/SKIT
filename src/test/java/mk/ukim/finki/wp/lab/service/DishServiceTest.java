@@ -24,6 +24,7 @@ import static org.mockito.Mockito.*;
  * Се користи Mockito за mock-ирање на Repository слојот.
  * Овие тестови НЕ користат база, туку ја тестираат бизнис логиката.
  */
+//unit testovi = testiranje samo edna klasa ili metod kade sto testirame service metodi i isklcoci
 class DishServiceTest {
 
     @Mock

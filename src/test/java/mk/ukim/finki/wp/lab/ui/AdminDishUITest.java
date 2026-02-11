@@ -74,7 +74,7 @@ public class AdminDishUITest {
         driver.findElement(By.id("dishId")).sendKeys("UITEST1");
         driver.findElement(By.id("name")).sendKeys("Ui Test Dish");
 
-        // ⚠️ Cuisine е ENUM → мора ТОЧНО ENUM име
+        // Cuisine е ENUM → мора ТОЧНО ENUM име
         driver.findElement(By.id("cuisine")).sendKeys("ITALIAN");
 
         driver.findElement(By.id("preparationTime")).sendKeys("10");

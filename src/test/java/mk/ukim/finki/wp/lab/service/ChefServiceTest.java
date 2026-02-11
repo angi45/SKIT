@@ -18,7 +18,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
-
 /**
  * Unit тестови за ChefServiceImpl со користење на Mockito.
  *
@@ -30,6 +29,7 @@ import static org.mockito.Mockito.*;
  *
  * Тестот е целосно усогласен со имплементацијата на ChefServiceImpl.
  */
+//unit testovi = testiranje samo edna klasa ili metod kade sto testirame service metodi i isklcoci
 class ChefServiceTest {
 
     @Mock

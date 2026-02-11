@@ -31,6 +31,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  *  - бришење на Dish по ID
  *  - листање на сите Dish поврзани со даден Chef
  */
+//testiraat samo repository sloj i povrzuvanje so baza t,e testcontainers startuva vistinska baza vo Docker, koja e aktivna samo za vreme na tstot
+//i ja gasi posle testot
+//komunikacija megju Spring Data JPA и realna PostgreSQL
 @DataJpaTest
 @Testcontainers
 class DishRepositoryTest {

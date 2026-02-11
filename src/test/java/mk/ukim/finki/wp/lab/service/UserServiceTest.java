@@ -27,6 +27,7 @@ import static org.mockito.Mockito.*;
  *
  * Репозиториумот и password encoder-от се mock-ираат за изолирано тестирање.
  */
+//unit testovi = testiranje samo edna klasa ili metod kade sto testirame service metodi i isklcoci
 class UserServiceTest {
 
     @Mock
